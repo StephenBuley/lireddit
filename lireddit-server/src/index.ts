@@ -1,6 +1,5 @@
-import { MikroORM } from "@mikro-orm/core"
 import "reflect-metadata"
-import { __prod__ } from "./constants"
+import { MikroORM } from "@mikro-orm/core"
 import MikroOrmConfig from "./mikro-orm.config"
 import express from "express"
 import {ApolloServer} from "apollo-server-express"
@@ -8,6 +7,7 @@ import {buildSchema} from "type-graphql"
 import { HelloResolver } from "./resolvers/hello"
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core"
 import { PostResolver } from "./resolvers/post"
+import { UserResolver } from "./resolvers/user"
 
 
 async function main() {
@@ -18,7 +18,7 @@ async function main() {
 
     const apolloServer = new ApolloServer({
         schema: await buildSchema({
-            resolvers: [HelloResolver, PostResolver],
+            resolvers: [HelloResolver, PostResolver, UserResolver],
             validate: false
         }),
         plugins: [ApolloServerPluginLandingPageGraphQLPlayground],
